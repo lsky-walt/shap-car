@@ -93,3 +93,83 @@ export const wrapSet = (data) => {
   window.localStorage.setItem("car_state", JSON.stringify(data));
   return data;
 };
+
+export const parseUrl = () => {
+  const [base, urlParam] = window.location.hash.split("?");
+  const urls = base.replace("#/", "").split(/\//g);
+  if (!urlParam) {
+    return [base, null, urls];
+  }
+  const p = urlParam.split(/&/g).map((str) => {
+    const [name, value] = str.split("=");
+    return { name, value };
+  });
+  return [base, p, urls];
+};
+
+// 仅限 url parse
+export const stringify = (arr) =>
+  arr.map((v) => `${v.name}=${v.value}`).join("&");
+
+export function appendParamToUrl(obj) {
+  const url = new URL(window.location.href);
+  const [base, urlParam] = parseUrl();
+
+  let effective = Object.keys(obj).filter((key) => obj[key]);
+
+  if (!effective || effective.length <= 0) return;
+
+  if (!urlParam) {
+    url.hash = `${base}?${effective
+      .map((key) => `${key}=${obj[key]}`)
+      .join("&")}`;
+    window.location.href = url.href;
+    return;
+  }
+
+  effective.forEach((key) => {
+    let curIndex = null;
+    urlParam.find((v, index) => {
+      if (v.name === key) {
+        curIndex = index;
+        return true;
+      }
+      return false;
+    });
+
+    if (curIndex !== null) {
+      urlParam[curIndex].value = obj[key];
+    } else {
+      urlParam.push({
+        name: key,
+        value: obj[key],
+      });
+    }
+  });
+  url.hash = `${base}?${stringify(urlParam)}`;
+  window.location.href = url.href;
+}
+
+export function productUrlParams() {
+  const [, params] = parseUrl();
+  if (!params) {
+    return {
+      size: "",
+      orderBy: "",
+    };
+  }
+  const p = params.reduce(
+    (acc, cur) => {
+      if (cur.name === "size" || cur.name === "orderBy") {
+        acc[cur.name] = cur.value;
+      }
+      return acc;
+    },
+    {
+      size: "",
+      orderBy: "",
+    }
+  );
+
+  return p;
+}

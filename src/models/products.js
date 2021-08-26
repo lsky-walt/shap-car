@@ -1,43 +1,47 @@
+import { getProducts } from "@/api/products";
+import { appendParamToUrl } from "@/util";
 
-import { getProducts } from '@/api/products'
+const initState = {
+  products: [],
+  size: "",
+  orderBy: "",
+};
 
 const products = {
-  namespace: 'products',
-  state: {
-    "text": "test",
-    products: [],
-    size: "",
-    orderBy: ""
-  },
+  namespace: "products",
+  state: initState,
   reducers: {
-    setProducts: (state, { payload }) => {
+    updateState: (state, { payload }) => {
+      const { size = "", orderBy = "", products } = payload;
       return {
         ...state,
-        products: payload
-      }
+        size,
+        orderBy,
+        products,
+      };
     },
-    changeSize: (state, { payload }) => {
-      return {
-        ...state,
-        size: payload.size
-      }
-    },
-    changeOrderBy: (state, { payload }) => {
-      return {
-        ...state,
-        orderBy: payload.orderBy
-      }
-    }
   },
   effects: {
-    *getProducts(_, { call, put }) {
-      const { data } = yield call(getProducts)
-      yield put({
-        type: 'setProducts',
-        payload: data.data
-      })
-    }
-  }
-}
+    *getProducts({ payload }, { call, put }) {
+      try {
+        const { data } = yield call(getProducts, payload);
+        const { size = "", orderBy = "" } = payload;
+        yield put({
+          type: "updateState",
+          payload: {
+            products: data.data,
+            size,
+            orderBy,
+          },
+        });
+        appendParamToUrl({ size, orderBy });
+      } catch (error) {
+        window.alert(
+          (error.response && error.response?.data?.message) || error.message
+        );
+      }
+    },
+  },
+};
 
-export default products
+export default products;

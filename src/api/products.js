@@ -1,3 +1,5 @@
-import axios from 'axios'
+import axios from "axios";
+import qs from "qs";
 
-export const getProducts = () => axios.get('/products.json')
+export const getProducts = (params) =>
+  axios.get(`http://localhost:8001/api/products?${qs.stringify(params)}`);

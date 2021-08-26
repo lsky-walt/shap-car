@@ -1,5 +1,6 @@
 import React from "react";
 import dva from "dva";
+import createLoading from "dva-loading";
 import "./index.css";
 import products from "./models/products";
 import car from "./models/car";
@@ -24,6 +25,9 @@ const app = new dva();
 // model
 app.model(products);
 app.model(car);
+
+// use plugin
+app.use(createLoading());
 
 // router
 app.router(() => <App></App>);

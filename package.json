@@ -9,18 +9,23 @@
     "@testing-library/user-event": "^12.1.10",
     "antd": "^4.16.13",
     "axios": "^0.21.1",
+    "cors": "^2.8.5",
     "dva": "^2.4.1",
+    "dva-loading": "^3.0.22",
+    "express": "^4.17.1",
     "lazysizes": "^5.3.2",
+    "qs": "^6.10.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "start": "craco start",
+    "start": "npm run serve & craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "craco eject"
+    "eject": "craco eject",
+    "serve": "node server/index.js"
   },
   "eslintConfig": {
     "extends": [

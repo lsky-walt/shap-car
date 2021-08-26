@@ -5,7 +5,7 @@ import Item from "./item";
 
 const { Option } = Select;
 
-function List({ data, onSelectChange, addToCart }) {
+function List({ data, onSelectChange, addToCart, orderBy = "" }) {
   return (
     <div className="container padding-left-8">
       <Row>
@@ -18,11 +18,11 @@ function List({ data, onSelectChange, addToCart }) {
               <div className="flex-end">
                 <span className="header-text">Order by </span>
                 <Select
-                  defaultValue="null"
+                  value={orderBy}
                   style={{ width: 200 }}
                   onChange={onSelectChange}
                 >
-                  <Option value="null">Select</Option>
+                  <Option value="">Select</Option>
                   <Option value="lowest">Lowest to highest</Option>
                   <Option value="highest">Highest to lowest</Option>
                 </Select>
