@@ -13,6 +13,8 @@
     "cors": "^2.8.5",
     "dva": "^2.4.1",
     "dva-loading": "^3.0.22",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
     "express": "^4.17.1",
     "lazysizes": "^5.3.2",
     "qs": "^6.10.1",
@@ -28,7 +30,7 @@
     "eject": "craco eject",
     "serve": "node server/index.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
