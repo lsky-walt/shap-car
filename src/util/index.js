@@ -115,7 +115,7 @@ export function appendParamToUrl(obj) {
   const url = new URL(window.location.href);
   const [base, urlParam] = parseUrl();
 
-  let effective = Object.keys(obj).filter((key) => obj[key]);
+  let effective = Object.keys(obj);
 
   if (!effective || effective.length <= 0) return;
 
