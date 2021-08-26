@@ -72,3 +72,24 @@ export const countNumber = (items, key = "quantity") => {
 export const formatCurrency = (num) => {
   return (num / 100).toFixed(2);
 };
+
+export const initCarState = () => {
+  const str = window.localStorage.getItem("car_state");
+  if (!str)
+    return {
+      items: [],
+    };
+  try {
+    return JSON.parse(str);
+  } catch (error) {
+    window.alert("解析缓存失败！");
+    return {
+      items: [],
+    };
+  }
+};
+
+export const wrapSet = (data) => {
+  window.localStorage.setItem("car_state", JSON.stringify(data));
+  return data;
+};

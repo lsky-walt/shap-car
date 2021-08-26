@@ -1,25 +1,25 @@
-import { addItemToList } from "@/util";
+import { addItemToList, initCarState, wrapSet } from "@/util";
+
+const initState = initCarState();
 
 const car = {
   namespace: "car",
-  state: {
-    items: [],
-  },
+  state: initState,
   reducers: {
     addToCart(state, { payload }) {
-      return {
+      return wrapSet({
         ...state,
         items: addItemToList(state.items, payload.item),
-      };
+      });
     },
     removeItem(state, { payload }) {
-      return {
+      return wrapSet({
         ...state,
         items: state.items.filter((v) => v.sku !== payload.item.sku),
-      };
+      });
     },
     updateItem(state, { payload }) {
-      return {
+      return wrapSet({
         ...state,
         items: state.items.map((v) => {
           if (v.sku === payload.item.sku) {
@@ -31,7 +31,7 @@ const car = {
           }
           return v;
         }),
-      };
+      });
     },
   },
 };
