@@ -173,3 +173,11 @@ export function productUrlParams() {
 
   return p;
 }
+
+export function handleUrl() {
+  const url = `${window.location.origin}${window.location.pathname}`;
+  if (url.lastIndexOf("/") === url.length - 1) {
+    return url;
+  }
+  return `${url}/`;
+}

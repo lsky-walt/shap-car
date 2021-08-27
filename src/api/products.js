@@ -1,14 +1,20 @@
 import axios from "axios";
-import { handleData } from "@/util";
+import { handleData, handleUrl } from "@/util";
 
 export const getProducts = (params) =>
   new Promise((resolve, reject) => {
-    axios.get(`/data.json`).then((res) => {
-      const { size, orderBy } = params;
-      setTimeout(() => {
-        resolve({
-          data: handleData(res.data.data, size, orderBy),
-        });
-      }, 500);
-    });
+    handleUrl();
+    axios
+      .get(`${handleUrl()}data.json`)
+      .then((res) => {
+        const { size, orderBy } = params;
+        setTimeout(() => {
+          resolve({
+            data: handleData(res.data.data, size, orderBy),
+          });
+        }, 500);
+      })
+      .catch((error) => {
+        reject(error);
+      });
   });
