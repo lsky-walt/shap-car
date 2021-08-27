@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/shap-car/static/css/main.0b82ef27.chunk.css",
-    "main.js": "/shap-car/static/js/main.8e8f3445.chunk.js",
-    "main.js.map": "/shap-car/static/js/main.8e8f3445.chunk.js.map",
+    "main.js": "/shap-car/static/js/main.6c0dcb97.chunk.js",
+    "main.js.map": "/shap-car/static/js/main.6c0dcb97.chunk.js.map",
     "runtime-main.js": "/shap-car/static/js/runtime-main.beb973f1.js",
     "runtime-main.js.map": "/shap-car/static/js/runtime-main.beb973f1.js.map",
     "static/css/2.a95be28f.chunk.css": "/shap-car/static/css/2.a95be28f.chunk.css",
@@ -38,6 +38,6 @@
     "static/css/2.a95be28f.chunk.css",
     "static/js/2.7768fcc8.chunk.js",
     "static/css/main.0b82ef27.chunk.css",
-    "static/js/main.8e8f3445.chunk.js"
+    "static/js/main.6c0dcb97.chunk.js"
   ]
 }
