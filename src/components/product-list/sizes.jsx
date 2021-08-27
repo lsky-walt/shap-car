@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Row, Col } from "antd";
+import { figureOutSize } from "@/util";
 
 export default class Sizes extends Component {
   constructor(props) {
@@ -10,15 +11,11 @@ export default class Sizes extends Component {
 
   onClick(type) {
     const { onClick, size } = this.props;
-    if (type === size) {
-      onClick("");
-      return;
-    }
-    onClick(type);
+    onClick(figureOutSize(size, type));
   }
 
   render() {
-    const { size } = this.props;
+    const { size = [] } = this.props;
     return (
       <div className="container size">
         <Row>
@@ -37,7 +34,9 @@ export default class Sizes extends Component {
                     key={v}
                   >
                     <div
-                      className={`circle-button ${v === size ? "active" : ""}`}
+                      className={`circle-button ${
+                        size.includes(v) ? "active" : ""
+                      }`}
                       onClick={this.onClick.bind(this, v)}
                     >
                       {v}

@@ -3,8 +3,6 @@ import { connect } from "dva";
 
 import { Row, Col, Spin } from "antd";
 
-import { productUrlParams } from "@/util";
-
 import Sizes from "./sizes";
 import List from "./list";
 
@@ -25,7 +23,6 @@ class ProductList extends React.Component {
 
   handleSize(size) {
     const { dispatch, products } = this.props;
-    if (products.size === size) return;
     dispatch({
       type: "products/getProducts",
       payload: { size, orderBy: products.orderBy },
@@ -75,7 +72,7 @@ const mdtp = (dispatch) => {
     initData: () =>
       dispatch({
         type: "products/getProducts",
-        payload: productUrlParams(),
+        payload: {},
       }),
     addToCart: (item) =>
       dispatch({

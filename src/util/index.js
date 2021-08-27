@@ -29,13 +29,15 @@ const order = {
   highest,
 };
 
-const filterFunc = (filter) => (item) => {
-  return item.availableSizes.includes(filter);
+const filterFunc = (filters) => (item) => {
+  return !!filters.find((i) => {
+    return item.availableSizes.includes(i);
+  });
 };
 
 export function handleData(data, filter, orderBy) {
   let d = data;
-  if (filter) {
+  if (filter && Array.isArray(filter) && filter.length > 0) {
     d = d.filter(filterFunc(filter));
   }
   if (orderBy) {
@@ -180,4 +182,13 @@ export function handleUrl() {
     return url;
   }
   return `${url}/`;
+}
+
+export function figureOutSize(sizes, size) {
+  let s = sizes;
+  if (s.includes(size)) {
+    return s.filter((v) => v !== size);
+  }
+  s.push(size);
+  return s;
 }

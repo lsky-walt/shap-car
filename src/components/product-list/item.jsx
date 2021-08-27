@@ -12,7 +12,8 @@ export default class Item extends Component {
     onClick && onClick(item);
   }
   render() {
-    const { title, sku, currencyFormat, installments, price } = this.props;
+    const { title, sku, currencyFormat, installments, price, availableSizes } =
+      this.props;
     return (
       <Col md={8} lg={6} span={6} className="margin-top-8">
         <div className="list-item" onClick={this.handleClick}>
@@ -43,6 +44,7 @@ export default class Item extends Component {
                   </>
                 ) : null}
               </div>
+              <div className="item-inst">Sizes: {availableSizes.join(",")}</div>
             </div>
           </div>
 
