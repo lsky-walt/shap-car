@@ -1,5 +1,14 @@
 import axios from "axios";
-import qs from "qs";
+import { handleData } from "@/util";
 
 export const getProducts = (params) =>
-  axios.get(`http://localhost:8001/api/products?${qs.stringify(params)}`);
+  new Promise((resolve, reject) => {
+    axios.get(`/data.json`).then((res) => {
+      const { size, orderBy } = params;
+      setTimeout(() => {
+        resolve({
+          data: handleData(res.data.data, size, orderBy),
+        });
+      }, 500);
+    });
+  });

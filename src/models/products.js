@@ -29,7 +29,7 @@ const products = {
         yield put({
           type: "updateState",
           payload: {
-            products: data.data,
+            products: data,
             size,
             orderBy,
           },
